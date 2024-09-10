@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 7749590109204213974}
   - component: {fileID: 7749590109204213968}
   - component: {fileID: 1481664197}
+  - component: {fileID: 5336287210542091193}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -309,6 +310,22 @@ MonoBehaviour:
   shell: {fileID: 7203314589265080190, guid: bd0856249eaac1648950c39de5db9623, type: 3}
   shootPoint: {fileID: 3549464666278813530}
   force: 30
+--- !u!114 &5336287210542091193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749590109806582344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616c0fbb54654dc4ab0721d16d6eec89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  explosionPrefab: {fileID: 122668, guid: 5f53e2b760f0b2a4c8b27bb6f25b3c90, type: 3}
+  currentHealth: 0
+  stunMs: 1000
 --- !u!1 &7749590109806582346
 GameObject:
   m_ObjectHideFlags: 0

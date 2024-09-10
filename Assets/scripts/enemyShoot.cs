@@ -10,6 +10,8 @@ public class enemyShoot : MonoBehaviour
     [SerializeField] float delay = 1f;
     bool canShoot = false;
     float shootTimer = 0;
+
+    public bool stunned = false;
     private void Awake()
     {
         shootTimer = 0;
@@ -23,7 +25,7 @@ public class enemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canShoot)
+        if (canShoot && !stunned)
         {
             shootTimer -= Time.deltaTime;
             if (shootTimer <= 0)
