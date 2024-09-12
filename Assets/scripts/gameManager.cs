@@ -22,6 +22,8 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] string startText = "Lets Get Ready To RUMBBLEEEEE";
 
+    public highScores hs;
+
     private void Awake()
     {
         gameState = GameState.start;
@@ -80,6 +82,8 @@ public class gameManager : MonoBehaviour
             Debug.Log("win");
             msgTxt.text = "les go (ur not even that good bro)";
             isGameOver = true;
+            hs.addScore(Mathf.RoundToInt(gameTime));
+            hs.saveScoresToFile();
         }
         if (isGameOver)
         {

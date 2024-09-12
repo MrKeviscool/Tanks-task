@@ -53,7 +53,7 @@ public class highScores : MonoBehaviour
         Debug.Log("High scores read from " + scoreFileName);
     }
 
-    void saveScoresToFile()
+    public void saveScoresToFile()
     {
         StreamWriter fileWriter = new StreamWriter(currentDirectory + "\\" + scoreFileName);
         for (int i = 0; i < scores.Length; i++)
@@ -61,8 +61,25 @@ public class highScores : MonoBehaviour
         fileWriter.Close();
         Debug.Log("scores written to " + scoreFileName);
     }
-    public void addScore(int newScore);
+    public void addScore(int newScore)
     {
-        
+        int desiredIndex = -1;
+        for(int i = 0; i < scores.Length; i++)
+        {
+            if (scores[i] > newScore || scores[i] == 0)
+            {
+                desiredIndex = i;
+                break;
+            }
+        }
+        if(desiredIndex < 0)
+        {
+            Debug.Log(newScore + " not good enough for list");
+            return;
+        }
+        for (int i = scores.Length; i > desiredIndex; i--)
+            scores[i] = scores[i - 1];
+        scores[desiredIndex] = newScore;
+        Debug.Log(newScore + " got on the list");
     }
 }
