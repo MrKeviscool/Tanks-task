@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shell : MonoBehaviour
 {
     [SerializeField] float maxLifeTime = 2f;
-    [SerializeField] float maxDamage  = 2f;
+    [SerializeField] float maxDamage  = 50f;
     [SerializeField] float exploRad = 5f;
     [SerializeField] float exploForce = 100f;
     [SerializeField] ParticleSystem exploParticles;

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifeTime: 2
-  maxDamage: 2
-  explosRad: 5
+  maxDamage: 34
+  exploRad: 5
   exploForce: 100
   exploParticles: {fileID: 19816286, guid: 5f53e2b760f0b2a4c8b27bb6f25b3c90, type: 3}
