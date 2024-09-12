@@ -19,16 +19,16 @@ public class gameManager : MonoBehaviour
 
     private void Awake()
     {
-        for(int i = 0; i < tanks.Length; i++)
-        {
-            tanks[i].SetActive(false);
-        }
+        gameState = GameState.start;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            tanks[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -52,18 +52,33 @@ public class gameManager : MonoBehaviour
 
     void gameStateStart()
     {
-        if (Input.GetKeyUp(KeyCode.Return)) { 
-        
-        }
+        onNewGame();
     }
     void gameStatePlaying()
     {
+        bool isGameOver = false;
+        gameTime += Time.deltaTime;
+        int seconds = Mathf.RoundToInt(gameTime);
 
+        if (isPLayerDed())
+        {
+            Debug.Log("loose");
+            isGameOver = true;
+        }
+        else if (oneTankLeft())
+        {
+            Debug.Log("win");
+            isGameOver = true;
+        }
+        if (isGameOver)
+        {
+            gameState = GameState.gameover;
+        }
     }
 
     void gameStateGameover()
     {
-
+        onNewGame();
     }
 
     bool oneTankLeft()
@@ -85,5 +100,18 @@ public class gameManager : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    void onNewGame()
+    {
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            gameTime = 0;
+            gameState = GameState.playing;
+            for (int i = 0; i < tanks.Length; i++)
+            {
+                tanks[i].SetActive(true);
+            }
+        }
     }
 }
