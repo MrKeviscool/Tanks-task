@@ -77,7 +77,7 @@ public class highScores : MonoBehaviour
             Debug.Log(newScore + " not good enough for list");
             return;
         }
-        for (int i = scores.Length; i > desiredIndex; i--)
+        for (int i = scores.Length -1; i > desiredIndex; i--)
             scores[i] = scores[i - 1];
         scores[desiredIndex] = newScore;
         Debug.Log(newScore + " got on the list");
