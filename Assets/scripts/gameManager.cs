@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.AI;
 
 public class gameManager : MonoBehaviour
 {
@@ -17,6 +17,11 @@ public class gameManager : MonoBehaviour
     GameState gameState;
     public GameState state { get { return gameState; } }
 
+    public TextMeshProUGUI msgTxt;
+    public TextMeshProUGUI timerTxt;
+
+    [SerializeField] string startText = "Lets Get Ready To RUMBBLEEEEE";
+
     private void Awake()
     {
         gameState = GameState.start;
@@ -29,6 +34,8 @@ public class gameManager : MonoBehaviour
         {
             tanks[i].SetActive(false);
         }
+        timerTxt.gameObject.SetActive(false);
+        msgTxt.text = startText;
     }
 
     // Update is called once per frame
@@ -60,14 +67,18 @@ public class gameManager : MonoBehaviour
         gameTime += Time.deltaTime;
         int seconds = Mathf.RoundToInt(gameTime);
 
+        timerTxt.text = string.Format("{0:D2}:{1:D2}", seconds / 60, seconds % 60);
+
         if (isPLayerDed())
         {
             Debug.Log("loose");
+            msgTxt.text = "YOU LOOSE LMAO";
             isGameOver = true;
         }
         else if (oneTankLeft())
         {
             Debug.Log("win");
+            msgTxt.text = "les go (ur not even that good bro)";
             isGameOver = true;
         }
         if (isGameOver)
@@ -97,13 +108,15 @@ public class gameManager : MonoBehaviour
         for(int i = 0; i < tanks.Length; i++)
         {
             if (tanks[i].activeSelf && tanks[i].tag == "Player")
-                return true;
+                return false;
         }
-        return false;
+        return true;
     }
 
     void onNewGame()
     {
+
+
         if (Input.GetKeyUp(KeyCode.Return))
         {
             gameTime = 0;
@@ -112,6 +125,8 @@ public class gameManager : MonoBehaviour
             {
                 tanks[i].SetActive(true);
             }
+            timerTxt.gameObject.SetActive(true);
+            msgTxt.text = "";
         }
     }
 }
