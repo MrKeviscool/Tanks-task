@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -24,6 +24,12 @@ public class gameManager : MonoBehaviour
 
     public highScores hs;
 
+    public GameObject hsPanel;
+    public TextMeshProUGUI hsText;
+
+    public Button newGameButt;
+    public Button hsButt;
+
     private void Awake()
     {
         gameState = GameState.start;
@@ -38,6 +44,10 @@ public class gameManager : MonoBehaviour
         }
         timerTxt.gameObject.SetActive(false);
         msgTxt.text = startText;
+        hsPanel.SetActive(false);
+        newGameButt.gameObject.SetActive(false);
+        hsPanel.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -88,6 +98,8 @@ public class gameManager : MonoBehaviour
         if (isGameOver)
         {
             gameState = GameState.gameover;
+            newGameButt.gameObject.SetActive(true);
+            hsButt.gameObject.SetActive(true);
         }
     }
 
@@ -117,9 +129,11 @@ public class gameManager : MonoBehaviour
         return true;
     }
 
-    void onNewGame()
+    public void onNewGame()
     {
-
+        newGameButt.gameObject.SetActive(false);
+        hsButt.gameObject.SetActive(false);
+        hsPanel.SetActive(false);
 
         if (Input.GetKeyUp(KeyCode.Return))
         {
@@ -132,5 +146,19 @@ public class gameManager : MonoBehaviour
             timerTxt.gameObject.SetActive(true);
             msgTxt.text = "";
         }
+    }
+
+    public void showHs()
+    {
+        msgTxt.text = "";
+        hsButt.gameObject.SetActive(false);
+        hsPanel.gameObject.SetActive(true);
+        string text = "";
+        for(int i = 0; i < hs.scores.Length; i++)
+        {
+            int seconds = hs.scores[i];
+            text += string.Format("{0:D2}:{1:D2}\n", seconds/60, seconds%60);
+        }
+        hsText.text = text;
     }
 }
